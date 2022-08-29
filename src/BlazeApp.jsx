@@ -1,7 +1,15 @@
+import { PureComponent } from "react";
 import { BlazeAppRouter } from "./router/BlazeAppRouter"
 
-export const BlazeApp = () => {
-  return (
-    <BlazeAppRouter />
-  )
+class BlazeApp extends PureComponent {
+
+
+  render() {
+
+    return (
+      <BlazeAppRouter />
+    )
+  }
 }
+
+export default BlazeApp;

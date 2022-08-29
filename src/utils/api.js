@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { apiUrl } from './constants';
+import qs from 'query-string';
 
 export const saveObject = (key, value) => {
     if (window && window.localStorage) {
@@ -146,3 +147,11 @@ export const commonActionAPIHit = (apiToHit, errorMsg, successMsg, showModal = t
         }
     }
 }
+
+export const getHeaders = () => {
+    let session = getSession();
+    return {
+        Authorization: `Token ${(session && session.accessToken) || null}`
+    }
+}
+
