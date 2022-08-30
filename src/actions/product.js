@@ -26,6 +26,6 @@ export const fetchProducts = () => {
     }
 }
 
-export const deleteProduct = commonActionAPIHit(deleteProductAPI);
-export const addNewProduct = commonActionAPIHit(addNewProductAPI);
-export const updateProduct = commonActionAPIHit(updateProductAPI);
+//export const deleteProduct = commonActionAPIHit(deleteProductAPI);
+//export const addNewProduct = commonActionAPIHit(addNewProductAPI);
+//export const updateProduct = commonActionAPIHit(updateProductAPI);

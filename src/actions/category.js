@@ -26,6 +26,6 @@ export const fetchCategories = () => {
     }
 }
 
-export const deleteCategory = commonActionAPIHit(deleteCategoryAPI);
-export const addNewCategory= commonActionAPIHit(addNewCategoryAPI);
-export const updateCategory = commonActionAPIHit(updateCategoryAPI);
+//export const deleteCategory = commonActionAPIHit(deleteCategoryAPI());
+//export const addNewCategory= commonActionAPIHit(addNewCategoryAPI());
+//export const updateCategory = commonActionAPIHit(updateCategoryAPI());

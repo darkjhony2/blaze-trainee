@@ -1,0 +1,1 @@
+export const AUTH_LOGIN = 'SET_COMPANY';

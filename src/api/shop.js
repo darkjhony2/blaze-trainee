@@ -13,5 +13,5 @@ export const addNewShopAPI = (shop) => {
 }
 
 export const deleteShopAPI = (shopId) => {
-    return apiDelete(`shops/delete/${companyId}`);
+    return apiDelete(`shops/delete/${shopId}`);
 }

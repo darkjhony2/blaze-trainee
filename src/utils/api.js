@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { apiUrl } from './constants';
 import qs from 'query-string';
+import { startLoading, stopLoading } from '../actions/loading';
 
 export const saveObject = (key, value) => {
     if (window && window.localStorage) {
@@ -90,7 +91,7 @@ export const apiPut = (endPoint, data, headers = {}) => {
     return apiReq(generateUrl(endPoint), data, 'put', headers);
 }
 
-export const addMessageCurry = (promisa, dispatch, errorMsg = '', successMsg = '', showLoading = true, showError = true) => {
+export const addMessageCurry = (promise, dispatch, errorMsg = '', successMsg = '', showLoading = true, showError = true) => {
     return new Promise(
         (resolve, reject) => {
 
@@ -101,12 +102,6 @@ export const addMessageCurry = (promisa, dispatch, errorMsg = '', successMsg = '
             promise
                 .then(response => {
 
-                    if (successMsg) {
-                        dispatch(
-                            openSuccessMessage(successMsg)
-                        )
-                    }
-
                     if (showLoading) {
                         dispatch(stopLoading())
                     }
@@ -115,16 +110,9 @@ export const addMessageCurry = (promisa, dispatch, errorMsg = '', successMsg = '
                 })
                 .catch(
                     err => {
-                        if (showError) {
-                            dispatch(
-                                openErrorMessage(errorMsg || ((err.response && err.response.data.message) || 'Server encountered an error'))
-                            )
-                        }
-
                         if (showLoading) {
                             dispatch(stopLoading())
                         }
-
                         reject(err)
                     }
                 )
@@ -153,5 +141,13 @@ export const getHeaders = () => {
     return {
         Authorization: `Token ${(session && session.accessToken) || null}`
     }
+}
+
+export function getSession() {
+	if (window && window.localStorage) {
+		return window.localStorage.getObject('session');
+	}
+
+	return null;
 }
 

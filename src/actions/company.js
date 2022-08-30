@@ -26,6 +26,6 @@ export const fetchCompanies = () => {
     }
 }
 
-export const deleteCompany = commonActionAPIHit(deleteCompanyAPI);
-export const addNewCompany = commonActionAPIHit(addNewCompanyAPI);
-export const updateCompany = commonActionAPIHit(updateCompanyAPI);
+//export const deleteCompany = commonActionAPIHit(deleteCompanyAPI);
+//export const addNewCompany = commonActionAPIHit(addNewCompanyAPI);
+//export const updateCompany = commonActionAPIHit(updateCompanyAPI);
