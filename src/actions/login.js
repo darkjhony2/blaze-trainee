@@ -9,14 +9,9 @@ export const authLogin = payload => ({
 })
 
 
-export const login = user => {
-    return dispatch => {
-        const data = { ...user }
-
-        return new Promise(
+export const login = (data) => (dispatch => new Promise(
             (resolve, reject) => {
-
-                addMessageCurry(singIn(data), dispatch)
+                addMessageCurry(singIn({...data}), dispatch)
                     .then(session => {
                         resolve(session)
                         dispatch(authLogin({ session }))
@@ -24,9 +19,6 @@ export const login = user => {
                     .catch(
                         err => reject(err)
                     )
+            })
+)
 
-            }
-        )
-
-    }
-}

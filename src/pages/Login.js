@@ -1,12 +1,14 @@
 import { Button, Grid, TextField } from "@mui/material";
-import { PureComponent } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { login } from "../actions/login";
 import { LoginLayout } from "../layout/LoginLayout";
 
 
-export class Login extends PureComponent {
+
+export class Login extends React.Component {
+
 
     state = {
         username: '',
@@ -15,7 +17,7 @@ export class Login extends PureComponent {
     }
 
     onSubmit = () => {
-       
+
         const {
             username,
             password
@@ -31,7 +33,9 @@ export class Login extends PureComponent {
 
         alert("hola")
 
-        this.props.dispatch(login(data));
+        this.props.dispatch(login(data)).then((response) => {
+            console.log(response);
+        });
     }
 
     onChange = (e) => {
@@ -73,11 +77,6 @@ export class Login extends PureComponent {
                                 </Button>
                             </Grid>
                         </Grid>
-                        <Grid container direction={'row'} justifyContent='end'>
-                            <Link component={""} color={'inherit'} to="/auth/register">
-                                Crear una cuenta
-                            </Link>
-                        </Grid>
                     </Grid>
                 </form>
             </LoginLayout>
@@ -85,8 +84,10 @@ export class Login extends PureComponent {
     }
 }
 
+const mapStateToProps = (state) => {
+    console.log("state", state)
+    return { ...state };
+}
 
-export default connect(state => ({
-    loginReducer: state.loginReducer,
-    dispatch: state.dispatch
-}))
+
+export default connect(mapStateToProps)(Login);
