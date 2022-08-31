@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom"
-import { Login } from "../pages"
+import { Home } from "../pages/Home"
+import Login from "../pages/Login"
 
 
 export const BlazeAppRouter = () => {
@@ -7,7 +8,7 @@ export const BlazeAppRouter = () => {
     <>
     <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/auth" />
+        <Route path="/switch" element={<Home />} />
     </Routes>
     </>
   )

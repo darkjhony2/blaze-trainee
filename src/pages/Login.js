@@ -4,10 +4,11 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { login } from "../actions/login";
 import { LoginLayout } from "../layout/LoginLayout";
+import { saveObject } from "../utils";
 
 
 
-export class Login extends React.Component {
+class Login extends React.Component {
 
 
     state = {
@@ -31,10 +32,10 @@ export class Login extends React.Component {
         data.username = username;
         data.password = password;
 
-        alert("hola")
-
         this.props.dispatch(login(data)).then((response) => {
-            console.log(response);
+            let {token} = response;
+            saveObject("token", token);
+            window.location.href = "/switch"
         });
     }
 
@@ -47,7 +48,7 @@ export class Login extends React.Component {
     render() {
         return (
             <LoginLayout title='Login'>
-                <form onSubmit={this.onSubmit}>
+                <form>
                     <Grid container>
                         <Grid item xs={12} sx={{ mt: 2 }}>
                             <TextField
@@ -72,7 +73,7 @@ export class Login extends React.Component {
 
                         <Grid container spacing={2} sx={{ mb: 2, mt: 1 }} justifyContent="center">
                             <Grid item xs={12} sm={6}>
-                                <Button type='submit' variant="contained" fullWidth>
+                                <Button onClick={this.onSubmit} type='button' variant="contained" fullWidth>
                                     Login
                                 </Button>
                             </Grid>
@@ -85,7 +86,6 @@ export class Login extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("state", state)
     return { ...state };
 }
 

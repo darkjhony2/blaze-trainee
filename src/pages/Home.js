@@ -1,8 +1,8 @@
-import { Grid, Button } from "@mui/material"
-import { Home as HomeIcon, PowerOff } from '@mui/icons-material'
-import { PureComponent } from "react"
+import { Grid, Button, Typography } from "@mui/material"
+import { Settings, PowerSettingsNew } from '@mui/icons-material'
+import React from "react"
 
-export class Home extends PureComponent {
+export class Home extends React.Component {
 
   render() {
     return (
@@ -13,7 +13,7 @@ export class Home extends PureComponent {
           sx={{ backgroundColor: 'rgb(12,183,231)' }}
           justifyContent={'center'}
         >
-          <Button><HomeIcon sx={{ color: 'white' }} /></Button>
+          <Button><Settings sx={{ color: 'white' }} /></Button>
         </Grid>
         <Grid
           container
@@ -22,7 +22,16 @@ export class Home extends PureComponent {
           justifyContent={'center'}
           justifySelf={'end'}
         >
-          <Button><PowerOff sx={{ color: 'white' }} /></Button>
+          <Button><PowerSettingsNew sx={{ color: 'white' }} /></Button>
+        </Grid>
+        <Grid
+          container
+          xs={'12'}
+          sx={{ paddingLeft: 10, paddingTop: 5, paddingRight: 10 }}
+        >
+          <Typography>
+            <h2>Total Locations</h2>
+          </Typography>
         </Grid>
 
       </Grid>

@@ -5,7 +5,7 @@ import { startLoading, stopLoading } from '../actions/loading';
 
 export const saveObject = (key, value) => {
     if (window && window.localStorage) {
-        window.localStorage.saveObject(key, value);
+        window.localStorage.setItem(key, value);
     }
 }
 
@@ -17,22 +17,22 @@ export const removeObject = (key) => {
 
 export const getObject = (key) => {
     if (window && window.localStorage) {
-        return window.localStorage.getObject(key);
+        return window.localStorage.getItem(key);
     }
     return null;
 }
 
 export const logOut = () => {
     return new Promise((res, rej) => {
-        localStorage.removeItem('session');
-        localStorage.removeItem('time');
-        localStorage.removeItem('docuSign')
+        localStorage.removeItem('token');
+        //localStorage.removeItem('time');
+        //localStorage.removeItem('docuSign')
         res(true);
     })
 }
 
 export const isLoggedIn = () => {
-    let session = getObject('session');
+    let session = getObject('token');
 
     let accessToken = session && session.accessToken;
 
@@ -47,7 +47,6 @@ export const apiReq = (endPoint, data, method, headers, requestOptions = {}) => 
     return new Promise((res, rej) => {
 
         headers = {
-            ...getHeaders(),
             ...headers
         }
         if (method === 'get' || method === 'delete') {
@@ -145,7 +144,7 @@ export const getHeaders = () => {
 
 export function getSession() {
 	if (window && window.localStorage) {
-		return window.localStorage.getObject('session');
+		return window.localStorage.getItem('token');
 	}
 
 	return null;
