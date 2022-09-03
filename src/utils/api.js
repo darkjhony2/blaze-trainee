@@ -47,15 +47,13 @@ export const apiReq = (endPoint, data, method, headers, requestOptions = {}) => 
     return new Promise((res, rej) => {
 
         headers = {
+            ...getHeaders(),
             ...headers
         }
         if (method === 'get' || method === 'delete') {
             data = {
                 ...requestOptions,
                 params: data,
-                paramsSerializer: function (params) {
-                    return qs.stringify(params, { arrayFormat: 'repeat' })
-                },
                 headers
             }
         }
@@ -138,7 +136,7 @@ export const commonActionAPIHit = (apiToHit, errorMsg, successMsg, showModal = t
 export const getHeaders = () => {
     let session = getSession();
     return {
-        Authorization: `Token ${(session && session.accessToken) || null}`
+        Authorization: `Bearer ${(session && session) || null}`
     }
 }
 

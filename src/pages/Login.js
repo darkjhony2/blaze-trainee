@@ -1,22 +1,20 @@
 import { Button, Grid, TextField } from "@mui/material";
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { login } from "../actions/login";
 import { LoginLayout } from "../layout/LoginLayout";
 import { saveObject } from "../utils";
 
-
-
 class Login extends React.Component {
 
-
-    state = {
-        username: '',
-        password: '',
-        loading: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            password: '',
+            loading: false
+        }
     }
-
     onSubmit = () => {
 
         const {
@@ -33,8 +31,10 @@ class Login extends React.Component {
         data.password = password;
 
         this.props.dispatch(login(data)).then((response) => {
-            let {token} = response;
+            let { token, username, roles } = response;
             saveObject("token", token);
+            saveObject("username", username);
+            saveObject("rol", roles[0]);
             window.location.href = "/switch"
         });
     }

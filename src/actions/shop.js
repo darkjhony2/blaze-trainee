@@ -8,14 +8,11 @@ export const setShops = (payload) => ({
     payload: payload
 })
 
-export const fetchShops = () => {
+export const fetchShops = (username) => {
     return dispatch => {
         return new Promise(
             (resolve, reject) => {
-
-                const data = {}
-
-                addMessageCurry(fetchShopsAPI(data), dispatch)
+                addMessageCurry(fetchShopsAPI(username), dispatch)
                     .then(shops => {
                         resolve(shops);
                         dispatch(setShops(shops));

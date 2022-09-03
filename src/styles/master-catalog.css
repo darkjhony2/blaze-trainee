@@ -1,0 +1,41 @@
+.select-master-catalog {
+    border: 1px solid #ced4da !important;
+    border-radius: 5px !important;
+    width: 100% !important;
+  }
+  
+  .select-master-catalog:after {
+    content: "" !important;
+    width: 0 !important;
+  }
+  
+  .select-master-catalog:before {
+    content: "" !important;
+    width: 0 !important;
+  }
+  
+  .select-master-catalog > div:after {
+    content: "" !important;
+    width: 0 !important;
+  }
+  
+  .select-master-catalog > div:before {
+    content: "" !important;
+    width: 0 !important;
+  }
+  
+  .select-master-catalog > div > div {
+    padding-left: 1em !important;
+  }
+  
+  .select-master-catalog > div > input {
+    padding-left: 1em !important;
+  }
+  
+  .select-master-catalog > div > textarea {
+    padding-left: 1em !important;
+  }
+  
+  .select-master-catalog > input {
+    padding-left: 1em !important;
+  }

@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import  BlazeApp  from './BlazeApp';
 import { Provider } from 'react-redux'
 import './style.css';
+import './styles/common.css'
 import store from './store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -1,0 +1,28 @@
+.main-menus-listing {
+    width: 23%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
+.main-menus-listing {
+    width: 30.3%;
+    margin: 0 3% 3% 0;
+}
+
+.main-menus-listing {
+    width: 46%;
+    margin: 2%;
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+    height: auto;
+}
+
+@media(max-width:380px) {
+    .main-menus-listing {
+        width: 200px;
+        display: block;
+        margin: 15px auto;
+        height: auto;
+    }
+}
