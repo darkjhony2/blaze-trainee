@@ -4,8 +4,12 @@ export const fetchShopsAPI = (data) => {
     return apiGet('shops', data, {});
 }
 
+export const getShopByIdAPI = (shopId) => {
+    return apiGet(`shops/${shopId}`);
+}
+
 export const updateShopAPI = (shop) => {
-    return apiPut(`shops/${shop.id}`, shop);
+    return apiPut(`shops`, shop);
 }
 
 export const addNewShopAPI = (shop) => {

@@ -1,12 +1,15 @@
-import { Grid, Button, Typography, Card, CardMedia, CardContent, CardActions, ButtonBase, Paper } from "@mui/material"
+import { Grid, Button, Typography, Paper } from "@mui/material"
 import { Settings, PowerSettingsNew } from '@mui/icons-material'
 import React from "react"
 import { connect } from "react-redux";
-import { fetchShops } from "../actions/shop";
+import { fetchShops, getShopById } from "../actions/shop";
+import { useNavigate } from "react-router-dom";
+import { removeObject } from "../utils";
 
 class Switch extends React.Component {
 
   constructor(props) {
+
     super(props);
     this.state = {
       shopId: ''
@@ -21,9 +24,27 @@ class Switch extends React.Component {
     this.props.dispatch(fetchShops({ username: localStorage.getItem("username") }));
   }
 
+  onClickAuth = () => {
+    const {
+      shopReducer = []
+    } = this.props
+    if (this.state.shopId.trim() != '') {
+      window.location.href = `/auth?shopId=${this.state.shopId}`;
+    } else {
+      alert("You must select a shop first.")
+      return;
+    }
+  }
+
+  onLogout = () => {
+    removeObject("username");
+    removeObject("rol");
+    removeObject("token");
+    window.location.href = `/`
+  }
+
 
   render() {
-
     const {
       shopReducer = []
     } = this.props
@@ -38,7 +59,9 @@ class Switch extends React.Component {
           sx={{ backgroundColor: 'rgb(12,183,231)' }}
           justifyContent={'center'}
         >
-          <Button><Settings sx={{ color: 'white' }} /></Button>
+          <Button onClick={this.onClickAuth}>
+            <Settings sx={{ color: 'white' }} />
+          </Button>
         </Grid>
         <Grid
           container
@@ -48,7 +71,7 @@ class Switch extends React.Component {
           justifyContent={'center'}
           justifySelf={'end'}
         >
-          <Button><PowerSettingsNew sx={{ color: 'white' }} /></Button>
+          <Button><PowerSettingsNew onClick={this.onLogout} sx={{ color: 'white' }} /></Button>
         </Grid>
         <Grid
           container
@@ -72,7 +95,7 @@ class Switch extends React.Component {
                 return (
                   <Grid
                     item xs={2}
-
+                    key={idx}
                   >
                     <Paper
                       style={{

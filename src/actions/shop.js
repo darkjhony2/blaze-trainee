@@ -1,9 +1,14 @@
-import { addNewShopAPI, deleteShopAPI, fetchShopsAPI, updateShopAPI } from "../api";
-import { SET_SHOP } from "../types";
+import { addNewShopAPI, deleteShopAPI, fetchShopsAPI, getShopByIdAPI, updateShopAPI } from "../api";
+import { SET_SHOP, SET_SHOPS } from "../types";
 import { addMessageCurry, commonActionAPIHit } from "../utils";
 
 
 export const setShops = (payload) => ({
+    type: SET_SHOPS,
+    payload: payload
+})
+
+export const setShop = (payload) => ({
     type: SET_SHOP,
     payload: payload
 })
@@ -18,6 +23,20 @@ export const fetchShops = (username) => {
                         dispatch(setShops(shops));
                     })
 
+            }
+        )
+    }
+}
+
+export const getShopById = (shopId) => {
+    return dispatch => {
+        return new Promise(
+            (resolve, reject) => {
+                addMessageCurry(getShopByIdAPI(shopId), dispatch)
+                    .then(shop => {
+                        resolve(shop);
+                        dispatch(setShop(shop));
+                    })
             }
         )
     }
