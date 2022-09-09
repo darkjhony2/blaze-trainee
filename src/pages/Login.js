@@ -31,10 +31,11 @@ class Login extends React.Component {
         data.password = password;
 
         this.props.dispatch(login(data)).then((response) => {
-            let { token, username, roles } = response;
+            let { token, username, roles, shopId } = response;
             saveObject("token", token);
             saveObject("username", username);
             saveObject("rol", roles[0]);
+            saveObject("shopId", shopId);
             window.location.href = "/switch"
         });
     }

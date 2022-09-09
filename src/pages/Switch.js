@@ -4,7 +4,7 @@ import React from "react"
 import { connect } from "react-redux";
 import { fetchShops, getShopById } from "../actions/shop";
 import { useNavigate } from "react-router-dom";
-import { removeObject } from "../utils";
+import { getObject, removeObject, saveObject } from "../utils";
 
 class Switch extends React.Component {
 
@@ -17,7 +17,9 @@ class Switch extends React.Component {
   }
 
   onShopChange = (shopId) => {
-    this.setState({ shopId });
+    this.setState({shopId});
+    removeObject("shopId");
+    saveObject("shopId", shopId);
   }
 
   componentDidMount = () => {
@@ -28,8 +30,8 @@ class Switch extends React.Component {
     const {
       shopReducer = []
     } = this.props
-    if (this.state.shopId.trim() != '') {
-      window.location.href = `/auth?shopId=${this.state.shopId}`;
+    if (getObject("shopId") != '' && getObject("shopId") != null) {
+      window.location.href = `/settings`;
     } else {
       alert("You must select a shop first.")
       return;
@@ -40,6 +42,7 @@ class Switch extends React.Component {
     removeObject("username");
     removeObject("rol");
     removeObject("token");
+    removeObject("shopId");
     window.location.href = `/`
   }
 
