@@ -40,6 +40,12 @@ class Login extends React.Component {
         });
     }
 
+    onKeyEnter = (e) => {
+        if(e.key === "Enter"){
+            this.onSubmit();
+        }
+    } 
+
     onChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -47,9 +53,10 @@ class Login extends React.Component {
     }
 
     render() {
+
         return (
             <LoginLayout title='Login'>
-                <form>
+                <form onKeyUp={e => this.onKeyEnter(e)}>
                     <Grid container>
                         <Grid item xs={12} sx={{ mt: 2 }}>
                             <TextField
@@ -74,7 +81,7 @@ class Login extends React.Component {
 
                         <Grid container spacing={2} sx={{ mb: 2, mt: 1 }} justifyContent="center">
                             <Grid item xs={12} sm={6}>
-                                <Button onClick={this.onSubmit} type='button' variant="contained" fullWidth>
+                                <Button id={"loginBtn"} onClick={this.onSubmit} type='button' variant="contained" fullWidth>
                                     Login
                                 </Button>
                             </Grid>

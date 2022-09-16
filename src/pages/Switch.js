@@ -2,8 +2,7 @@ import { Grid, Button, Typography, Paper } from "@mui/material"
 import { Settings, PowerSettingsNew } from '@mui/icons-material'
 import React from "react"
 import { connect } from "react-redux";
-import { fetchShops, getShopById } from "../actions/shop";
-import { useNavigate } from "react-router-dom";
+import { fetchShops } from "../actions/shop";
 import { getObject, removeObject, saveObject } from "../utils";
 
 class Switch extends React.Component {
@@ -16,10 +15,12 @@ class Switch extends React.Component {
     }
   }
 
-  onShopChange = (shopId) => {
+  onShopChange = (shopId, shopName) => {
     this.setState({shopId});
     removeObject("shopId");
+    removeObject("shopName");
     saveObject("shopId", shopId);
+    saveObject("shopName", shopName);
   }
 
   componentDidMount = () => {
@@ -107,7 +108,7 @@ class Switch extends React.Component {
                       }}
                       elevation={8}
                       className={` ${this.state.shopId === shop.id ? 'selectedShopBg' : ''}`}
-                      onClick={() => this.onShopChange(shop.id)}>
+                      onClick={() => this.onShopChange(shop.id, shop.name)}>
                       <div>
                         <img
                           style={{

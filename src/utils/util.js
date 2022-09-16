@@ -4,7 +4,7 @@ import TaxOption from "../components/shopSettings/TaxOption";
 import Terminals from "../components/shopSettings/Terminals";
 
 
-export const getPageToBeRendered =(pageToBeRendered) => {
+export const getPageToBeRendered = (pageToBeRendered) => {
 
     switch (pageToBeRendered) {
         case 'shop':
@@ -18,4 +18,9 @@ export const getPageToBeRendered =(pageToBeRendered) => {
         default:
             return;
     }
+}
+
+export const getBooleanTranslation = (value) => {
+    if (value) return "enabled"
+    return "disabled"
 }

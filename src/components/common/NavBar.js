@@ -10,17 +10,20 @@ class Navbar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: false
+            open: false,
+            selectedIndex: -1
         }
     }
 
-    onClick = (open) => {
-        this.setState({ open: !this.state.open })
+    onClick = (index) => {
+        this.setState({
+            selectedIndex: this.state.selectedIndex === index ? -1 : index
+        })
     }
 
     render() {
 
-        const {onChangePage} = this.props
+        const { onChangePage } = this.props
 
         return (
             <Box
@@ -39,17 +42,17 @@ class Navbar extends React.Component {
                                     {
                                         tab.childrenList.length <= 0 ?
                                             <>
-                                                <ListItemLink url = {tab.url} icon={tab.icon} key={idx} label={tab.title} />
+                                                <ListItemLink url={tab.url} icon={tab.icon} key={idx} label={tab.title} />
                                             </>
                                             :
                                             <>
-                                                <ListItemLink url = {tab.url} icon={tab.icon} label={tab.title} key={idx} open={this.state.open} onClick={this.onClick} />
-                                                <Collapse key={idx} component="li" in={this.state.open} timeout="auto" unmountOnExit>
+                                                <ListItemLink url={tab.url} icon={tab.icon} label={tab.title} key={idx} open={idx === this.state.selectedIndex} onClick={() => this.onClick(idx)} />
+                                                <Collapse key={idx} component="li" in={idx === this.state.selectedIndex} timeout="auto" unmountOnExit>
                                                     {
                                                         tab.childrenList.map((child, index) => {
                                                             return (
                                                                 <List key={index} disablePadding>
-                                                                    <ListItemLink onChangePage = {onChangePage} url = {child.url} icon={child.icon} label={child.title} sx={{ pl: 4 }} />
+                                                                    <ListItemLink onChangePage={onChangePage} url={child.url} icon={child.icon} label={child.title} sx={{ pl: 4 }} />
                                                                 </List>
                                                             )
                                                         })
