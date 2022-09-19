@@ -37,7 +37,7 @@ class Settings extends React.Component {
                 <Grid
                     item
                     container
-                    xs={2}
+                    xs={0} sm ={2}
                 >
                     <Grid item xs={12}>
                         <NavBar onChangePage={this.onChangePage} />
@@ -46,7 +46,7 @@ class Settings extends React.Component {
                 <Grid
                     item
                     container
-                    xs={10}
+                    xs={12} sm={10}
                 >
                     <Grid item xs={12}>
                         {page}

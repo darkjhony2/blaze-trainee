@@ -1,9 +1,10 @@
-import { Grid, Button, Typography, Paper } from "@mui/material"
-import { Settings, PowerSettingsNew } from '@mui/icons-material'
+import { Grid, Button, Typography, Paper, IconButton } from "@mui/material"
+import { Settings, PowerSettingsNew, Add } from '@mui/icons-material'
 import React from "react"
 import { connect } from "react-redux";
 import { fetchShops } from "../actions/shop";
 import { getObject, removeObject, saveObject } from "../utils";
+import SaveModal from "../components/shop/SaveModal";
 
 class Switch extends React.Component {
 
@@ -11,12 +12,25 @@ class Switch extends React.Component {
 
     super(props);
     this.state = {
-      shopId: ''
+      shopId: '',
+      openModal: false
     }
   }
 
+  onOpenModal = () => {
+    this.setState({
+      openModal: true
+    })
+  };
+
+  onCloseModal = () => {
+    this.setState({
+      openModal: false
+    })
+  };
+
   onShopChange = (shopId, shopName) => {
-    this.setState({shopId});
+    this.setState({ shopId });
     removeObject("shopId");
     removeObject("shopName");
     saveObject("shopId", shopId);
@@ -28,9 +42,6 @@ class Switch extends React.Component {
   }
 
   onClickAuth = () => {
-    const {
-      shopReducer = []
-    } = this.props
     if (getObject("shopId") != '' && getObject("shopId") != null) {
       window.location.href = `/settings`;
     } else {
@@ -44,6 +55,7 @@ class Switch extends React.Component {
     removeObject("rol");
     removeObject("token");
     removeObject("shopId");
+    removeObject("companyId");
     window.location.href = `/`
   }
 
@@ -98,7 +110,8 @@ class Switch extends React.Component {
               shops.map((shop, idx) => {
                 return (
                   <Grid
-                    item xs={2}
+                    item xs={12} sm ={4} md={3} lg={2}
+                    sx={{marginTop: 1}}
                     key={idx}
                   >
                     <Paper
@@ -106,7 +119,7 @@ class Switch extends React.Component {
                         width: 150,
                         height: 200
                       }}
-                      elevation={8}
+                      elevation={20}
                       className={` ${this.state.shopId === shop.id ? 'selectedShopBg' : ''}`}
                       onClick={() => this.onShopChange(shop.id, shop.name)}>
                       <div>
@@ -126,9 +139,28 @@ class Switch extends React.Component {
                 )
               })
             }
+            <Grid
+              item xs={2}
+              container
+              sx={{marginTop: 1}}
+            >
+              <Paper
+                style={{
+                  width: 150,
+                  height: 200
+                }}
+                elevation={20}>
+                <div style={{ minWidth: 150, minHeight: 200 }} >
+                  <IconButton onClick={this.onOpenModal} sx={{ minWidth: 150, minHeight: 140 }} aria-label="add">
+                    <Add style={{ minWidth: 120, minHeight: 140 }} />
+                  </IconButton>
+                  <Typography style={{ marginLeft: 13 }}>Create New Shop</Typography>
+                </div>
+              </Paper>
+            </Grid>
           </Grid>
         </Grid>
-
+        <SaveModal openModal = {this.state.openModal} onCloseModal = {this.onCloseModal} modalTitle = {"New Shop"} />
       </Grid>
     )
   }

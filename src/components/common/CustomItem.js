@@ -11,7 +11,7 @@ class CustomItem extends React.Component {
 
     render() {
 
-        const { label, type, editMode, value, onChange, textName } = this.props;
+        const { label, type, editMode, value, onChange, textName, saveMode } = this.props;
 
         return (
             <ListItem>
@@ -21,13 +21,13 @@ class CustomItem extends React.Component {
                     <Grid item xs={6}>
                         {label}
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} container>
                         {
                             type === "text" ?
                                 <>
                                     {
-                                        editMode && editMode ?
-                                            <Grid xs={4}>
+                                        editMode || saveMode && editMode || saveMode ?
+                                            <Grid item xs={saveMode ? 8 : 4} sx={saveMode ? { marginLeft: 'auto', marginRight: 0 } : ''}>
                                                 <TextField
                                                     type={type}
                                                     name={textName}
@@ -45,13 +45,16 @@ class CustomItem extends React.Component {
                                         type === "boolean" ?
                                             <>
                                                 {
-                                                    editMode && editMode ?
-                                                        <Switch
-                                                            checked={value}
-                                                            onChange={e => onChange(e, type)}
-                                                            inputProps={{ 'aria-label': 'controlled' }}
-                                                            name={textName}
-                                                        />
+                                                    editMode || saveMode && editMode || saveMode ?
+                                                        <>
+                                                            <Switch
+                                                                checked={value}
+                                                                onChange={e => onChange(e, type)}
+                                                                inputProps={{ 'aria-label': 'controlled' }}
+                                                                name={textName}
+                                                                sx={saveMode ? { marginLeft: '85%', marginRight: '0px' } : ''}
+                                                            />
+                                                        </>
                                                         :
                                                         <Typography>{getBooleanTranslation(value)}</Typography>
                                                 }

@@ -38,16 +38,16 @@ class Navbar extends React.Component {
                     {
                         settingsTabs.map((tab, idx) => {
                             return (
-                                <>
+                                <div key={idx}>
                                     {
                                         tab.childrenList.length <= 0 ?
                                             <>
-                                                <ListItemLink url={tab.url} icon={tab.icon} key={idx} label={tab.title} />
+                                                <ListItemLink url={tab.url} icon={tab.icon} label={tab.title} />
                                             </>
                                             :
                                             <>
-                                                <ListItemLink url={tab.url} icon={tab.icon} label={tab.title} key={idx} open={idx === this.state.selectedIndex} onClick={() => this.onClick(idx)} />
-                                                <Collapse key={idx} component="li" in={idx === this.state.selectedIndex} timeout="auto" unmountOnExit>
+                                                <ListItemLink url={tab.url} icon={tab.icon} label={tab.title} open={idx === this.state.selectedIndex} onClick={() => this.onClick(idx)} />
+                                                <Collapse component="li" in={idx === this.state.selectedIndex} timeout="auto" unmountOnExit>
                                                     {
                                                         tab.childrenList.map((child, index) => {
                                                             return (
@@ -60,7 +60,7 @@ class Navbar extends React.Component {
                                                 </Collapse>
                                             </>
                                     }
-                                </>
+                                </div>
                             )
                         })
                     }

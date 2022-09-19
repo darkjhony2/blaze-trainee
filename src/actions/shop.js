@@ -42,6 +42,32 @@ export const getShopById = (shopId) => {
     }
 }
 
-//export const deleteShop = commonActionAPIHit(deleteShopAPI);
-//export const addNewShop = commonActionAPIHit(addNewShopAPI);
-//export const updateShop = commonActionAPIHit(updateShopAPI);
+export const updateShop = (shop) => {
+    return dispatch => {
+        return new Promise(
+            (resolve, reject) => {
+                addMessageCurry(updateShopAPI(shop), dispatch)
+            }
+        )
+    }
+}
+
+export const saveShop = (shop) => {
+    return dispatch => {
+        return new Promise(
+            (resolve, reject) => {
+                addMessageCurry(addNewShopAPI(shop), dispatch)
+            }
+        )
+    }
+}
+
+export const deleteShop = (shopId) => {
+    return dispatch => {
+        return new Promise(
+            (resolve, reject) => {
+                addMessageCurry(deleteShopAPI(shopId), dispatch)
+            }
+        )
+    }
+}

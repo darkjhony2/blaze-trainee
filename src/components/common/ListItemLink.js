@@ -13,16 +13,16 @@ class ListItemLink extends React.Component {
 
     onClick = () => {
         const { url, onChangePage } = this.props
-        if(url === "switch"){
+        if (url === "switch") {
             window.location.href = url;
             removeObject("shopId");
-        }else{
+        } else {
             onChangePage(url);
         }
     }
 
     render() {
-        const { open, label, key, icon, url, ...other } = this.props;
+        const { open, label, icon, url, ...other } = this.props;
 
         let expand = null;
         if (open != null) {
